@@ -1,7 +1,8 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { StaticQuery, graphql } from "gatsby";
 import { HelmetDatoCms } from "gatsby-source-datocms";
+import MobileMenu from "./MobileMenu";
+import NavBar from "./NavBar";
 
 import "../styles/index.scss";
 
@@ -40,20 +41,18 @@ const TemplateWrapper = ({ children }) => {
         }
       `}
       render={data => (
-        <main>
+        <main id="actual-body">
           <HelmetDatoCms
             favicon={data.datoCmsSite.faviconMetaTags}
             seo={data.datoCmsHome.seoMetaTags}
           />
+          <NavBar />
+          <MobileMenu />
           {children}
         </main>
       )}
     />
   );
-};
-
-TemplateWrapper.propTypes = {
-  children: PropTypes.object
 };
 
 export default TemplateWrapper;

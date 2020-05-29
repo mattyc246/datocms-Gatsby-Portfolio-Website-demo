@@ -4,7 +4,7 @@ import Layout from "../components/layout"
 import styled from "styled-components";
 
 const Container = styled.div`
-  height: 100vh;
+  min-height: calc(100vh - 100px);
   width: 100vw;
   position: relative;
 `
