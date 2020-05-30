@@ -11,8 +11,6 @@ const Nav = styled.nav`
   justify-content: space-between;
   align-items: center;
   background-color: white;
-  position: sticky;
-  top: 0;
   z-index: 999;
 
   @media screen and (min-width: 740px){

@@ -51,7 +51,7 @@ const StyledLink = styled(Link)`
 
 const StyledIcon = styled(props => <FontAwesomeIcon {...props} />)`
   color: black;
-  transform: ${props => props.expanded ? 'rotate(180deg)' : 'translate(0, -125%) rotate(0deg)'};
+  transform: ${props => props.expanded ? 'rotate(180deg)' : 'rotate(0deg)'};
   transition: 1.5s ease-in-out;
 `
 
