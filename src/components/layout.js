@@ -1,12 +1,16 @@
-import React from "react";
+import React, {useRef} from "react";
 import { StaticQuery, graphql } from "gatsby";
 import { HelmetDatoCms } from "gatsby-source-datocms";
 import MobileMenu from "./MobileMenu";
 import NavBar from "./NavBar";
+import Footer from './Footer';
 
 import "../styles/index.scss";
 
+const scrollToRef = (ref) => window.scrollTo(0, ref.current.offsetTop);
+
 const TemplateWrapper = ({ children }) => {
+  const topRef = useRef()
   return (
     <StaticQuery
       query={graphql`
@@ -41,7 +45,7 @@ const TemplateWrapper = ({ children }) => {
         }
       `}
       render={data => (
-        <main id="actual-body">
+        <main id="actual-body" ref={topRef}>
           <HelmetDatoCms
             favicon={data.datoCmsSite.faviconMetaTags}
             seo={data.datoCmsHome.seoMetaTags}
@@ -49,6 +53,7 @@ const TemplateWrapper = ({ children }) => {
           <NavBar />
           <MobileMenu />
           {children}
+          <Footer scrollToRef={() => scrollToRef(topRef)} />
         </main>
       )}
     />

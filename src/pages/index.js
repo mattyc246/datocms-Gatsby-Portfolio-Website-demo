@@ -90,7 +90,7 @@ const IndexPage = ({ data }) => (
             <li>Mobile Applications (React Native)</li>
           </ul>
           <p>You can view a collection of my previous work through this website. Feel free to explore.</p>
-          <FancyButton to="/projects" className="my-4" centered>View Projects</FancyButton>
+          <FancyButton to="/work" className="my-4" centered>View Work</FancyButton>
         </div>
         <div className="col-12 col-lg-5 offset-lg-1">
           <img src={"https://via.placeholder.com/500"} alt={"placeholder"} width="100%" />

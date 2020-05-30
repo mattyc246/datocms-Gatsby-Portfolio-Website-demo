@@ -41,9 +41,10 @@ const NavBar = () => {
       <h5>Matthew Cross</h5>
       <NavLinks>
         <StyledLink to="/">Home</StyledLink>
-        <StyledLink to="/">Home</StyledLink>
-        <StyledLink to="/">Home</StyledLink>
-        <StyledLink to="/">Home</StyledLink>
+        <StyledLink to="/">About</StyledLink>
+        <StyledLink to="/">Work</StyledLink>
+        <StyledLink to="/">Blog</StyledLink>
+        <StyledLink to="/">Contact</StyledLink>
       </NavLinks>
     </Nav>
   )
