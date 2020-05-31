@@ -19,7 +19,7 @@ exports.createPages = ({ graphql, actions }) => {
       result.data.allDatoCmsBlog.edges.map(({ node: blog }) => {
         createPage({
           path: `blog/${blog.slug}`,
-          component: path.resolve(`./src/templates/blog.js`),
+          component: path.resolve(`./src/templates/blog-template.js`),
           context: {
             slug: blog.slug,
           },
