@@ -10,6 +10,11 @@ import FancyButton from "../components/FancyButton";
 const HeroContent = styled.div`
   a {
     display: block;
+    :hover {
+      color: white;
+      text-decoration: none;
+      font-weight: 700;
+    }
   }
 
   img {
@@ -30,7 +35,7 @@ export default ({ data: { datoCmsBlog } }) => {
           <h1 className="my-4">{datoCmsBlog.title}</h1>
           <small>Written By: {datoCmsBlog.writtenBy}</small>
           <p className="my-4">{datoCmsBlog.blurb}</p>
-          <p>Published: {datoCmsBlog.publishedDate}</p>
+          <small>Published: {datoCmsBlog.publishedDate}</small>
         </HeroContent>
       </ContentContainer>
       <ContentContainer>
