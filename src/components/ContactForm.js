@@ -1,14 +1,14 @@
-import React from 'react'
-import styled from 'styled-components'
+import React from "react";
+import styled from "styled-components";
 
 const Label = styled.label`
   display: block;
-`
+`;
 
 const InputGroup = styled.div`
   width: 100%;
-  padding: 1rem 0;
-`
+  padding: 0.5rem 0;
+`;
 
 const Input = styled.input`
   display: block;
@@ -41,27 +41,55 @@ const TextArea = styled.textarea`
   }
 `;
 
+const StyledButton = styled.button`
+  display: block;
+  width: 200px;
+  padding: 1rem;
+  text-align: center;
+  background-color: rgb(128, 255, 212);
+  ${(props) => (props.centered ? "margin: 0 auto;" : "")}
+  ${(props) => (props.dark ? "color: black;" : "")}
+  border-radius: 3px;
+  font-weight: 700;
+  transition: 0.5s ease-in-out;
+  outline: none;
+
+  :hover {
+    text-decoration: none;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+    transform: scale(1.05);
+    transition: 0.5s ease-in-out;
+  }
+`;
+
 const ContactForm = () => {
   return (
-    <form>
+    <form
+      name="Contact Form"
+      method="POST"
+      data-netlify="true"
+      action="/success"
+    >
+      <input type="hidden" name="form-name" value="Contact Form" />
       <InputGroup>
         <Label>Name:</Label>
-        <Input type="text" placeholder="Full name" />
+        <Input type="text" name="name" placeholder="Full name" />
       </InputGroup>
       <InputGroup>
         <Label>Email:</Label>
-        <Input type="text" placeholder="Valid email address" />
+        <Input type="text" name="email" placeholder="Valid email address" />
       </InputGroup>
       <InputGroup>
         <Label>Subject:</Label>
-        <Input type="text" placeholder="Nature of enquiry" />
+        <Input type="text" name="subject" placeholder="Nature of enquiry" />
       </InputGroup>
       <InputGroup>
         <Label>Message:</Label>
-        <TextArea rows="4" placeholder="Leave your message..."/>
+        <TextArea rows="4" name="message" placeholder="Leave your message..." />
       </InputGroup>
+      <StyledButton type="submit">Submit</StyledButton>
     </form>
-  )
-}
+  );
+};
 
-export default ContactForm
+export default ContactForm;
