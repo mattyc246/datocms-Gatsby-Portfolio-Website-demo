@@ -1,11 +1,16 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React, {useRef} from "react";
 import { StaticQuery, graphql } from "gatsby";
 import { HelmetDatoCms } from "gatsby-source-datocms";
+import MobileMenu from "./MobileMenu";
+import NavBar from "./NavBar";
+import Footer from './Footer';
 
 import "../styles/index.scss";
 
-const TemplateWrapper = ({ children }) => {
+const scrollToRef = (ref) => window.scrollTo(0, ref.current.offsetTop);
+
+const TemplateWrapper = ({ children, seo }) => {
+  const topRef = useRef()
   return (
     <StaticQuery
       query={graphql`
@@ -18,17 +23,6 @@ const TemplateWrapper = ({ children }) => {
               ...GatsbyDatoCmsFaviconMetaTags
             }
           }
-          datoCmsHome {
-            seoMetaTags {
-              ...GatsbyDatoCmsSeoMetaTags
-            }
-            introTextNode {
-              childMarkdownRemark {
-                html
-              }
-            }
-            copyright
-          }
           allDatoCmsSocialProfile(sort: { fields: [position], order: ASC }) {
             edges {
               node {
@@ -40,20 +34,19 @@ const TemplateWrapper = ({ children }) => {
         }
       `}
       render={data => (
-        <main>
+        <main id="actual-body" ref={topRef}>
           <HelmetDatoCms
             favicon={data.datoCmsSite.faviconMetaTags}
-            seo={data.datoCmsHome.seoMetaTags}
+            seo={seo}
           />
+          <NavBar />
+          <MobileMenu />
           {children}
+          <Footer scrollToRef={() => scrollToRef(topRef)} />
         </main>
       )}
     />
   );
-};
-
-TemplateWrapper.propTypes = {
-  children: PropTypes.object
 };
 
 export default TemplateWrapper;
