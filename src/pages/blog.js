@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Layout from "../components/layout";
 import ContentContainer from "../components/ContentContainer";
 import FancyButton from "../components/FancyButton";
-import {Link} from 'gatsby'
+import { Link, graphql } from "gatsby";
 
 const BlogCard = styled.div`
   width: 100%;
@@ -28,6 +28,7 @@ const Latest = styled.div`
   border: 1px solid white;
   border-radius: 5px;
   padding: 1.5rem;
+  display: none;
 
   div {
     margin: 10px 0;
@@ -36,7 +37,8 @@ const Latest = styled.div`
     justify-content: space-between;
     height: 50px;
 
-    h4, p {
+    h4,
+    p {
       margin: 0;
     }
   }
@@ -48,6 +50,10 @@ const Latest = styled.div`
       color: white;
       text-decoration: underline;
     }
+  }
+
+  @media screen and (min-width: 740px) {
+    display: block;
   }
 `;
 
@@ -61,26 +67,26 @@ const Blog = ({ data: { allDatoCmsBlog, datoCmsBlogpage } }) => {
           personal experiences, my personal opinions to tutorials on how to
           build and implement certain features in code.
         </p>
-        {
-          allDatoCmsBlog.nodes.length > 0 ? (
-            <Latest>
-              <div>
-                <h4>Latest:</h4>
-                <p>{allDatoCmsBlog.nodes[0].title}</p>
-                <Link to={`/blog/${allDatoCmsBlog.nodes[0].slug}`}>Read now</Link>
-              </div>
-            </Latest>
-          ) : ""
-        }
+        {allDatoCmsBlog.nodes.length > 0 ? (
+          <Latest>
+            <div>
+              <h4>Latest:</h4>
+              <p>{allDatoCmsBlog.nodes[0].title}</p>
+              <Link to={`/blog/${allDatoCmsBlog.nodes[0].slug}`}>Read now</Link>
+            </div>
+          </Latest>
+        ) : (
+          ""
+        )}
       </ContentContainer>
       <ContentContainer>
         <div className="row justify-content-center my-4">
           {allDatoCmsBlog.nodes.length === 0 ? (
-            <h3 style={{margin: '15vh auto'}}>No posts yet...</h3>
+            <h3 style={{ margin: "15vh auto" }}>No posts yet...</h3>
           ) : (
             allDatoCmsBlog.nodes.map((blogPost) => {
               return (
-                <div className="col-12 col-md-6 col-lg-4">
+                <div className="col-12 col-md-6 col-lg-4 my-3">
                   <BlogCard>
                     <h4>{blogPost.title}</h4>
                     <img

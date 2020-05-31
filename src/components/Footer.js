@@ -39,10 +39,10 @@ const Footer = ({ scrollToRef }) => {
       <FooterLinks>
         <h5>Links</h5>
         <LinksBox>
-          {/* <Link to="/">About</Link> */}
-          {/* <Link to="/">Work</Link> */}
+          <Link to="/">About</Link>
+          <Link to="/">Work</Link>
           <Link to="/blog">Blog</Link>
-          {/* <Link to="/">Contact</Link> */}
+          <Link to="/contact">Contact</Link>
         </LinksBox>
       </FooterLinks>
       <small style={{ alignSelf: "flex-end" }}>
