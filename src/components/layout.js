@@ -9,7 +9,7 @@ import "../styles/index.scss";
 
 const scrollToRef = (ref) => window.scrollTo(0, ref.current.offsetTop);
 
-const TemplateWrapper = ({ children }) => {
+const TemplateWrapper = ({ children, seo }) => {
   const topRef = useRef()
   return (
     <StaticQuery
@@ -22,17 +22,6 @@ const TemplateWrapper = ({ children }) => {
             faviconMetaTags {
               ...GatsbyDatoCmsFaviconMetaTags
             }
-          }
-          datoCmsHome {
-            seoMetaTags {
-              ...GatsbyDatoCmsSeoMetaTags
-            }
-            introTextNode {
-              childMarkdownRemark {
-                html
-              }
-            }
-            copyright
           }
           allDatoCmsSocialProfile(sort: { fields: [position], order: ASC }) {
             edges {
@@ -48,7 +37,7 @@ const TemplateWrapper = ({ children }) => {
         <main id="actual-body" ref={topRef}>
           <HelmetDatoCms
             favicon={data.datoCmsSite.faviconMetaTags}
-            seo={data.datoCmsHome.seoMetaTags}
+            seo={seo}
           />
           <NavBar />
           <MobileMenu />

@@ -63,10 +63,10 @@ const MobileMenu = () => {
         <h5>Matthew Cross</h5>
         <NavLinks expanded={expanded}>
           <StyledLink to="/" activeStyle={{fontWeight: '700', color: 'black'}}>Home</StyledLink>
-          <StyledLink to="/" activeStyle={{fontWeight: '700', color: 'black'}}>About</StyledLink>
-          <StyledLink to="/" activeStyle={{fontWeight: '700', color: 'black'}}>Work</StyledLink>
-          <StyledLink to="/" activeStyle={{fontWeight: '700', color: 'black'}}>Blog</StyledLink>
-          <StyledLink to="/" activeStyle={{fontWeight: '700', color: 'black'}}>Contact</StyledLink>
+          {/* <StyledLink to="/" activeStyle={{fontWeight: '700', color: 'black'}}>About</StyledLink> */}
+          {/* <StyledLink to="/" activeStyle={{fontWeight: '700', color: 'black'}}>Work</StyledLink> */}
+          {/* <StyledLink to="/" activeStyle={{fontWeight: '700', color: 'black'}}>Blog</StyledLink> */}
+          {/* <StyledLink to="/" activeStyle={{fontWeight: '700', color: 'black'}}>Contact</StyledLink> */}
         </NavLinks>
         <StyledIcon expanded={expanded} icon={faArrowAltCircleDown} onClick={() => setExpanded(!expanded)}/>
       </NavContents>

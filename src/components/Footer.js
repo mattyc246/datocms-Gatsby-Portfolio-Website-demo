@@ -38,12 +38,12 @@ const Footer = ({scrollToRef}) => {
     <StyledFooter>
       <FooterLinks>
         <h5>Links</h5>
-        <LinksBox>
+        {/* <LinksBox>
           <Link to="/">About</Link>
           <Link to="/">Work</Link>
           <Link to="/">Blog</Link>
           <Link to="/">Contact</Link>
-        </LinksBox>
+        </LinksBox> */}
       </FooterLinks>
         <small style={{alignSelf: 'flex-end'}}>{new Date().getFullYear()} Designed & Created by Matthew Cross</small>
       <BackToTop icon={faArrowUp} onClick={scrollToRef}/>
