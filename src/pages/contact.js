@@ -72,7 +72,7 @@ const Contact = ({ data: { datoCmsContact } }) => {
             </IconLink>
             <IconLink
               className="my-4"
-              href="mailto:mattjcrossdev@gmail.com"
+              href="https://www.instagram.com/mattyc246"
               target="_blank"
             >
               <FontAwesomeIcon icon={faInstagram} />
