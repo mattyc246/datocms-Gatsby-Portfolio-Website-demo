@@ -10,7 +10,7 @@ import { faFacebookSquare, faLinkedin, faGithubSquare, faInstagram } from "@fort
 
 const IconLink = styled.a`
   display: flex;
-  width: 50%;
+  width: 80%;
   margin: 0 auto;
   justify-content: space-between;
   align-items: center;
@@ -26,6 +26,10 @@ const IconLink = styled.a`
   svg {
     font-size: 36px;
     margin-right: 2rem;
+  }
+
+  @media screen and (min-width: 740px){
+    width: 50%;
   }
 `;
 

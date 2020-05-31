@@ -28,6 +28,7 @@ const Latest = styled.div`
   border: 1px solid white;
   border-radius: 5px;
   padding: 1.5rem;
+  display: none;
 
   div {
     margin: 10px 0;
@@ -49,6 +50,10 @@ const Latest = styled.div`
       color: white;
       text-decoration: underline;
     }
+  }
+
+  @media screen and (min-width: 740px) {
+    display: block;
   }
 `;
 
@@ -81,7 +86,7 @@ const Blog = ({ data: { allDatoCmsBlog, datoCmsBlogpage } }) => {
           ) : (
             allDatoCmsBlog.nodes.map((blogPost) => {
               return (
-                <div className="col-12 col-md-6 col-lg-4">
+                <div className="col-12 col-md-6 col-lg-4 my-3">
                   <BlogCard>
                     <h4>{blogPost.title}</h4>
                     <img
