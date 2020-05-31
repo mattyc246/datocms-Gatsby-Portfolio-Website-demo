@@ -9,7 +9,8 @@ const NavBar = styled.nav`
   height: ${props => props.expanded ? '100vh' : '75px'};
   background-color: ${props => props.expanded ? 'aquamarine' : 'white'};
   transition: 1.5s ease-in-out;
-  position: fixed;
+  position: sticky;
+  top: 0;
   z-index: 999;
 
   @media screen and (min-width: 740px) {
@@ -65,7 +66,7 @@ const MobileMenu = () => {
           <StyledLink to="/" activeStyle={{fontWeight: '700', color: 'black'}}>Home</StyledLink>
           {/* <StyledLink to="/" activeStyle={{fontWeight: '700', color: 'black'}}>About</StyledLink> */}
           {/* <StyledLink to="/" activeStyle={{fontWeight: '700', color: 'black'}}>Work</StyledLink> */}
-          {/* <StyledLink to="/" activeStyle={{fontWeight: '700', color: 'black'}}>Blog</StyledLink> */}
+          <StyledLink to="/blog" activeStyle={{fontWeight: '700', color: 'black'}}>Blog</StyledLink>
           {/* <StyledLink to="/" activeStyle={{fontWeight: '700', color: 'black'}}>Contact</StyledLink> */}
         </NavLinks>
         <StyledIcon expanded={expanded} icon={faArrowAltCircleDown} onClick={() => setExpanded(!expanded)}/>
