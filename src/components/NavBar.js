@@ -44,7 +44,7 @@ const NavBar = () => {
         {/* <StyledLink to="/" activeStyle={{fontWeight: '700', color: 'black'}}>About</StyledLink> */}
         {/* <StyledLink to="/" activeStyle={{fontWeight: '700', color: 'black'}}>Work</StyledLink> */}
         <StyledLink to="/blog" activeStyle={{fontWeight: '700', color: 'black'}}>Blog</StyledLink>
-        {/* <StyledLink to="/" activeStyle={{fontWeight: '700', color: 'black'}}>Contact</StyledLink> */}
+        <StyledLink to="/contact" activeStyle={{fontWeight: '700', color: 'black'}}>Contact</StyledLink>
       </NavLinks>
     </Nav>
   )
