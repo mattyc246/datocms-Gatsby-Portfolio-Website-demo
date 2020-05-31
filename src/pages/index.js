@@ -80,8 +80,8 @@ const IndexPage = ({ data: {datoCmsHome} }) => {
           </div>
           <div className="col-12 col-lg-5 offset-lg-1">
             <img
-              src={"https://via.placeholder.com/500"}
-              alt={"placeholder"}
+              src={datoCmsHome.servicesImage.url}
+              alt={datoCmsHome.servicesImage.alt}
               width="100%"
             />
           </div>
@@ -93,7 +93,8 @@ const IndexPage = ({ data: {datoCmsHome} }) => {
           <div className="col-12 col-lg-8">
             <div
               dangerouslySetInnerHTML={{
-                __html: datoCmsHome.missionStatementNode.childMarkdownRemark.html,
+                __html:
+                  datoCmsHome.missionStatementNode.childMarkdownRemark.html,
               }}
             ></div>
           </div>
@@ -121,6 +122,10 @@ export const query = graphql`
         childMarkdownRemark {
           html
         }
+      }
+      servicesImage {
+        url
+        alt
       }
     }
   }

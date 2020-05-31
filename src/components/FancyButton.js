@@ -9,10 +9,11 @@ const StyledButton = styled(Link)`
   text-align: center;
   background-color: rgb(128, 255, 212);
   ${(props) => (props.centered ? "margin: 0 auto;" : "")}
+  ${(props) => (props.dark ? "color: black;" : "")}
   border-radius: 3px;
   font-weight: 700;
   transition: 0.5s ease-in-out;
-  
+
   :hover {
     text-decoration: none;
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
