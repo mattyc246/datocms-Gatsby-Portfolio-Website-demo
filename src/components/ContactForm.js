@@ -70,6 +70,7 @@ const ContactForm = () => {
       data-netlify="true"
       action="/success"
     >
+      <Label></Label>
       <input type="hidden" name="form-name" value="Contact Form" />
       <InputGroup>
         <Label>Name:</Label>
