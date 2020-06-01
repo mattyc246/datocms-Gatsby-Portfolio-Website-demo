@@ -23,14 +23,6 @@ const TemplateWrapper = ({ children, seo }) => {
               ...GatsbyDatoCmsFaviconMetaTags
             }
           }
-          allDatoCmsSocialProfile(sort: { fields: [position], order: ASC }) {
-            edges {
-              node {
-                profileType
-                url
-              }
-            }
-          }
         }
       `}
       render={data => (
