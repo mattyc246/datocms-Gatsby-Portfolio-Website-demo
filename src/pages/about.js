@@ -14,8 +14,8 @@ const TechContainer = styled.div`
 `;
 
 const Stack = styled.div`
-  width: 150px;
-  height: 150px;
+  width: 80px;
+  height: 80px;
   margin: 1.5rem;
   background-image: url(${(props) => props.imgUrl});
   background-size: contain;
@@ -39,6 +39,11 @@ const Stack = styled.div`
       color: black;
       transition: 0.3s ease-in-out;
     }
+  }
+
+  @media screen and (min-width: 740px) {
+    width: 150px;
+    height: 150px;
   }
 `;
 
