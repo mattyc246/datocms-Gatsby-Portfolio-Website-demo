@@ -46,8 +46,14 @@ export default ({ data: { datoCmsBlog } }) => {
       </ContentContainer>
       <ContentContainer dark>
         <h3>Want to get in touch?</h3>
-        <p>If you like this or anything else you see throughout my website and would like to get in touch with me for any reason, you can reach out to me through the link below.</p>
-        <FancyButton to="/contact" dark>Get in touch</FancyButton>
+        <p>
+          If you like this or anything else you see throughout my website and
+          would like to get in touch with me for any reason, you can reach out
+          to me through the link below.
+        </p>
+        <FancyButton to="/contact" dark>
+          Get in touch
+        </FancyButton>
       </ContentContainer>
     </Layout>
   );

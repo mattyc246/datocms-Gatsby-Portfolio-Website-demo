@@ -67,7 +67,7 @@ const IndexPage = ({ data: {datoCmsHome} }) => {
       </Container>
       <ContentContainer>
         <h4>Services</h4>
-        <div className="row my-4">
+        <div className="row my-4" data-sal="slide-up" data-sal-duration="500">
           <div className="col-12 col-lg-6">
             <div
               dangerouslySetInnerHTML={{
@@ -89,7 +89,7 @@ const IndexPage = ({ data: {datoCmsHome} }) => {
       </ContentContainer>
       <ContentContainer dark>
         <h4>Mission Statement</h4>
-        <div className="row my-4">
+        <div className="row my-4" data-sal="slide-up" data-sal-duration="500">
           <div className="col-12 col-lg-8">
             <div
               dangerouslySetInnerHTML={{
