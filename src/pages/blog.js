@@ -61,7 +61,7 @@ const Blog = ({ data: { allDatoCmsBlog, datoCmsBlogpage } }) => {
   return (
     <Layout seo={datoCmsBlogpage.seoMetaTags}>
       <ContentContainer dark>
-        <h2 className="my-4">Blog</h2>
+        <h1 className="my-4">Blog</h1>
         <p>
           A curation of articles and posts written by me. Content can vary from
           personal experiences, my personal opinions to tutorials on how to

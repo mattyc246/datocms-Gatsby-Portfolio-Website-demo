@@ -40,7 +40,7 @@ const Footer = ({ scrollToRef }) => {
         <h5>Links</h5>
         <LinksBox>
           <Link to="/about">About</Link>
-          <Link to="/">Work</Link>
+          <Link to="/work">Work</Link>
           <Link to="/blog">Blog</Link>
           <Link to="/contact">Contact</Link>
         </LinksBox>
