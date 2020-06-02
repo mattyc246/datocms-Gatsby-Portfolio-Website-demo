@@ -42,7 +42,7 @@ const NavBar = () => {
       <NavLinks>
         <StyledLink to="/" activeStyle={{fontWeight: '700', color: 'black'}}>Home</StyledLink>
         <StyledLink to="/about" activeStyle={{fontWeight: '700', color: 'black'}}>About</StyledLink>
-        <StyledLink to="/" >Work</StyledLink>
+        <StyledLink to="/work" activeStyle={{fontWeight: '700', color: 'black'}}>Work</StyledLink>
         <StyledLink to="/blog" activeStyle={{fontWeight: '700', color: 'black'}}>Blog</StyledLink>
         <StyledLink to="/contact" activeStyle={{fontWeight: '700', color: 'black'}}>Contact</StyledLink>
       </NavLinks>
