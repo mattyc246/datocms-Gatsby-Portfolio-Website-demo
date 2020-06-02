@@ -64,8 +64,8 @@ const Work = ({ data: { work } }) => {
               <div key={idx} className="row my-4">
                 <div className="col-12 col-lg-4">
                   <img
-                    src={project.coverImage.uploadId.url}
-                    alt="nil"
+                    src={project.coverImage.url}
+                    alt={project.coverImage.alt}
                     width="100%"
                   />
                   <SiteLink className="my-2" href={project.siteUrl} centered>
@@ -87,7 +87,7 @@ const Work = ({ data: { work } }) => {
                       return (
                         <TechBox
                           key={id}
-                          bgImg={language.uploadId.url}
+                          bgImg={language.url}
                           data-sal="zoom-in"
                           data-sal-duration="500"
                         />
@@ -126,14 +126,11 @@ export const pageQuery = graphql`
         }
         groupProject
         coverImage {
-          uploadId {
-            url
-          }
+          url
+          alt
         }
         languages {
-          uploadId {
-            url
-          }
+          url
         }
         siteUrl
       }
