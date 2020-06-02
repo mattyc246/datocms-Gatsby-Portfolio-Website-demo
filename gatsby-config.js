@@ -8,6 +8,7 @@ module.exports = {
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-sass`,
     `gatsby-transformer-remark`,
+    `gatsby-plugin-scroll-reveal`,
     `gatsby-plugin-styled-components`,
     {
       resolve: `gatsby-source-datocms`,
@@ -16,4 +17,4 @@ module.exports = {
       },
     },
   ],
-}
+};

@@ -57,6 +57,8 @@ const About = ({ data: { about } }) => {
           dangerouslySetInnerHTML={{
             __html: about.subtitleNode.childMarkdownRemark.html,
           }}
+          data-sal="slide-left"
+          data-sal-duration="500"
         />
       </ContentContainer>
       <ContentContainer>
@@ -67,6 +69,8 @@ const About = ({ data: { about } }) => {
           dangerouslySetInnerHTML={{
             __html: about.bioNode.childMarkdownRemark.html,
           }}
+          data-sal="slide-up"
+          data-sal-duration="500"
         />
       </ContentContainer>
       <ContentContainer dark>
@@ -76,19 +80,21 @@ const About = ({ data: { about } }) => {
           dangerouslySetInnerHTML={{
             __html: about.techStackBioNode.childMarkdownRemark.html,
           }}
+          data-sal="slide-up"
+          data-sal-duration="500"
         />
       </ContentContainer>
       <ContentContainer>
-        <TechContainer>
-          {
-            about.techStacks.map((stack, idx) => {
-              return(
-                <Stack key={idx} imgUrl={stack.url} >
-                  <div><h6 className="text-center">{stack.title}</h6></div>
-                </Stack>
-              )
-            })
-          }
+        <TechContainer data-sal="zoom-in" data-sal-duration="500">
+          {about.techStacks.map((stack, idx) => {
+            return (
+              <Stack key={idx} imgUrl={stack.url}>
+                <div>
+                  <h6 className="text-center">{stack.title}</h6>
+                </div>
+              </Stack>
+            );
+          })}
         </TechContainer>
       </ContentContainer>
     </Layout>
