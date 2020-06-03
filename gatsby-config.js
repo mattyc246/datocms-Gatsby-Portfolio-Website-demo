@@ -10,6 +10,7 @@ module.exports = {
     `gatsby-transformer-remark`,
     `gatsby-plugin-scroll-reveal`,
     `gatsby-plugin-styled-components`,
+    `gatsby-plugin-recaptcha`,
     {
       resolve: `gatsby-source-datocms`,
       options: {

@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import Recaptcha from "react-recaptcha"
 
 const Label = styled.label`
   display: block;
@@ -69,6 +70,7 @@ const ContactForm = () => {
       method="POST"
       data-netlify="true"
       action="/success"
+      data-netlify-recaptcha="true"
     >
       <Label></Label>
       <input type="hidden" name="form-name" value="Contact Form" />
@@ -88,6 +90,7 @@ const ContactForm = () => {
         <Label>Message:</Label>
         <TextArea rows="4" name="message" placeholder="Leave your message..." />
       </InputGroup>
+      <Recaptcha className="my-3" sitekey={process.env.GATSBY_RECAPTCHA_KEY} />
       <StyledButton type="submit">Submit</StyledButton>
     </form>
   );
