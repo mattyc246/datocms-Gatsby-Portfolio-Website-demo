@@ -4,14 +4,19 @@ import Layout from "../components/layout";
 import styled from "styled-components";
 import ContentContainer from "../components/ContentContainer";
 import FancyButton from "../components/FancyButton";
+import Code from "../images/code.jpg"
 
 const Container = styled.div`
   min-height: calc(100vh - 70px);
   width: 100vw;
   position: relative;
-  padding-top: 70px;
+  background-color: black;
 
   @media screen and (min-width: 740px) {
+    background-image: url(${Code});
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
     min-height: calc(100vh - 100px);
     padding-top: 0px;
   }
@@ -20,7 +25,7 @@ const Container = styled.div`
 const Triangle = styled.div`
   width: 0;
   height: 0;
-  background-color: black;
+  background-color: transparent;
   border-left: 100vw solid white;
   border-bottom: calc(100vh - 70px) solid transparent;
   position: relative;
