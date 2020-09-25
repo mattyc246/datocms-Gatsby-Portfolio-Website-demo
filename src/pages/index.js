@@ -59,52 +59,7 @@ const StyledTitle = styled.h1`
 const IndexPage = ({ data: {datoCmsHome} }) => {
   return (
     <Layout seo={datoCmsHome.seoMetaTags}>
-      <Container>
-        <CenterHero>
-          <StyledTitle color={"black"} alignment={"left"}>
-            Full Stack
-          </StyledTitle>
-          <StyledTitle color={"white"} alignment={"right"}>
-            Developer
-          </StyledTitle>
-        </CenterHero>
-        <Triangle></Triangle>
-      </Container>
-      <ContentContainer>
-        <h4>Services</h4>
-        <div className="row my-4" data-sal="slide-up" data-sal-duration="500">
-          <div className="col-12 col-lg-6">
-            <div
-              dangerouslySetInnerHTML={{
-                __html: datoCmsHome.servicesTextNode.childMarkdownRemark.html,
-              }}
-            ></div>
-            <FancyButton to="/work" className="my-4" centered>
-              View Work
-            </FancyButton>
-          </div>
-          <div className="col-12 col-lg-5 offset-lg-1">
-            <img
-              src={datoCmsHome.servicesImage.url}
-              alt={datoCmsHome.servicesImage.alt}
-              width="100%"
-            />
-          </div>
-        </div>
-      </ContentContainer>
-      <ContentContainer dark>
-        <h4>Mission Statement</h4>
-        <div className="row my-4" data-sal="slide-up" data-sal-duration="500">
-          <div className="col-12 col-lg-8">
-            <div
-              dangerouslySetInnerHTML={{
-                __html:
-                  datoCmsHome.missionStatementNode.childMarkdownRemark.html,
-              }}
-            ></div>
-          </div>
-        </div>
-      </ContentContainer>
+
     </Layout>
   );
 }

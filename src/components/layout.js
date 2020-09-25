@@ -1,16 +1,14 @@
-import React, {useRef} from "react";
+import React, {useState} from "react";
 import { StaticQuery, graphql } from "gatsby";
 import { HelmetDatoCms } from "gatsby-source-datocms";
 import MobileMenu from "./MobileMenu";
 import NavBar from "./NavBar";
-import Footer from './Footer';
 
 import "../styles/index.scss";
 
-const scrollToRef = (ref) => window.scrollTo(0, ref.current.offsetTop);
-
 const TemplateWrapper = ({ children, seo }) => {
-  const topRef = useRef()
+  const [navOpen, setNavOpen] = useState(true)
+
   return (
     <StaticQuery
       query={graphql`
@@ -26,15 +24,14 @@ const TemplateWrapper = ({ children, seo }) => {
         }
       `}
       render={data => (
-        <main id="actual-body" ref={topRef}>
+        <main id="actual-body">
           <HelmetDatoCms
             favicon={data.datoCmsSite.faviconMetaTags}
             seo={seo}
           />
-          <NavBar />
+          <NavBar navOpen={navOpen} setNavOpen={setNavOpen} />
           <MobileMenu />
           {children}
-          <Footer scrollToRef={() => scrollToRef(topRef)} />
         </main>
       )}
     />
