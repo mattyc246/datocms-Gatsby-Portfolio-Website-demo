@@ -2,25 +2,26 @@ import React from 'react'
 import styled from 'styled-components';
 import { Link } from "gatsby";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronUp } from '@fortawesome/free-solid-svg-icons';
+import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 
 const FloatyNav = styled.header`
   display: none;
   background-color: rgba(255, 255, 255, 1);
   padding: 0.5rem 1rem;
-  width: 17.5vw;
-  height: 650px;
+  width: 250px;
+  height: 100vh;
   position: fixed;
-  bottom: ${(props) => (props.navOpen ? "-20px" : "-575px")};
-  right: 20px;
+  right: ${(props) => (props.navOpen ? "0px" : "-250px")};
+  top: 0px;
   flex-direction: column;
   align-items: center;
-  transition: bottom 1200ms cubic-bezier(0.215, 0.61, 0.355, 1);
+  transition: right 1200ms cubic-bezier(0.39, 1.52, 0.46, 0.92);
+  box-shadow: 15px 15px 25px rgba(0,0,0,0.2);
 
   small {
     opacity: ${(props) => (props.navOpen ? "0" : "1")};
     font-size: 13px;
-    transition: opacity 1200ms cubic-bezier(0.215, 0.61, 0.355, 1);
+    transition: opacity 1200ms cubic-bezier(0.39, 1.52, 0.46, 0.92);
   }
 
   p {
@@ -46,14 +47,16 @@ const StyledIcon = styled(FontAwesomeIcon)`
   color: black;
   opacity: 0.6;
   margin-bottom: 0.2rem;
-  ${props => props.navOpen ? "transform: rotate(180deg);" : "transform: rotate(0deg);"}
-  transition: transform 1200ms cubic-bezier(0.215, 0.610, 0.355, 1);
+  ${(props) =>
+    props.navOpen ? "transform: rotate(180deg);" : "transform: rotate(0deg);"}
+  transition: all 1200ms cubic-bezier(0.39, 1.52, 0.46, 0.92);
+  position: relative;
+  right: 150px;
 
   :hover {
-    transition: all 1000ms ease-in-out;
     opacity: 1;
   }
-`
+`;
 
 const FlexyLinks = styled.nav`
   flex-grow: 1;
@@ -62,23 +65,60 @@ const FlexyLinks = styled.nav`
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
-`
+
+  a {
+    font-weight: 400;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-transform: uppercase;
+
+    span {
+      display: block;
+      width: 0;
+      height: 2px;
+      background-color: black;
+    }
+
+    :hover {
+      span {
+        width: 100%;
+        transition: width 400ms cubic-bezier(0.39, 1.52, 0.46, 0.92);
+      }
+    }
+  }
+`;
 
 const NavBar = ({navOpen, setNavOpen}) => {
   return (
     <FloatyNav navOpen={navOpen}>
-      <StyledIcon navOpen={navOpen} icon={faChevronUp} onClick={() => setNavOpen(!navOpen)}/>
-      <small>Navigator</small>
-      <p>Navigator</p>
+      <StyledIcon
+        navOpen={navOpen}
+        icon={faChevronLeft}
+        onClick={() => setNavOpen(!navOpen)}
+      />
+      <p>Navigation</p>
       <FlexyLinks>
-        <Link>Home</Link>
-        <Link>About</Link>
-        <Link>Work</Link>
-        <Link>Blog</Link>
-        <Link>Contact</Link>
+        <Link to="/">
+          <span></span>Home<span></span>
+        </Link>
+        <Link to="/about">
+          <span></span>About<span></span>
+        </Link>
+        <Link to="/work">
+          <span></span>Work<span></span>
+        </Link>
+        <a href="https://blog.matthewcross.me">
+          <span></span>Blog<span></span>
+        </a>
+        <Link to="/contact">
+          <span></span>Contact<span></span>
+        </Link>
       </FlexyLinks>
     </FloatyNav>
-  )
+  );
 }
 
 export default NavBar;

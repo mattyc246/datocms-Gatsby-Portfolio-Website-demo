@@ -2,58 +2,73 @@ import React, {useState} from 'react';
 import styled from "styled-components";
 import {Link} from 'gatsby'
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faArrowAltCircleDown} from "@fortawesome/free-regular-svg-icons"
+import {faChevronDown} from "@fortawesome/free-solid-svg-icons"
 
 const NavBar = styled.nav`
   width: 100%;
-  height: ${props => props.expanded ? '100vh' : '75px'};
-  background-color: ${props => props.expanded ? 'aquamarine' : 'white'};
-  transition: 1.5s ease-in-out;
-  position: sticky;
-  top: 0;
+  height: 100vh;
+  background-color: white;
+  transition: all 2000ms cubic-bezier(0.39, 1.52, 0.46, 0.92);
+  position: fixed;
+  top: ${(props) => (props.expanded ? "0" : "calc(-100vh + 50px)")};
+  box-shadow: 10px 10px 30px rgba(0,0,0,0.1);
   z-index: 999;
 
   @media screen and (min-width: 740px) {
     display: none;
   }
-`
+`;
 
 const NavContents = styled.div`
   height: 100%;
   width: 100%;
-  padding: 1rem;
+  padding: 1rem 1rem 0.5rem 1rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
   position: relative;
+
+  h6 {
+    position: absolute;
+    left: 0px;
+    top: 50vh;
+    transform: translate(-50%, -50%) rotate(180deg);
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    letter-spacing: 5px;
+    height: 100vh;
+    text-align: center;
+  }
 `;
 
 const NavLinks = styled.div`
-  visibility: ${(props) => (props.expanded ? "visible" : "hidden")};
   width: 50%;
   height: 70%;
   display: flex;
+  flex-grow: 1;
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
-  opacity: ${props => props.expanded ? '1' : '0'};
   transition: opacity 1.5s ease-in-out;
+
+  a{
+    color: rgba(0,0,0,0.6);
+
+    :hover {
+      color: rgba(0,0,0,1);
+      text-decoration: underline;
+    }
+  }
 `;
 
-const StyledLink = styled(Link)`
-  color: rgba(0,0,0,0.6);
 
-  :hover {
-    color: rgba(0,0,0,1);
-    text-decoration: underline;
-  }
-`
-
-const StyledIcon = styled(props => <FontAwesomeIcon {...props} />)`
+const StyledIcon = styled(FontAwesomeIcon)`
   color: black;
+  font-size: 28px;
   transform: ${props => props.expanded ? 'rotate(180deg)' : 'rotate(0deg)'};
   transition: 1.5s ease-in-out;
+  cursor: pointer;
 `
 
 const MobileMenu = () => {
@@ -61,15 +76,15 @@ const MobileMenu = () => {
   return (
     <NavBar expanded={expanded}>
       <NavContents>
-        <h5>Matthew Cross</h5>
+        <h6>Matthew Cross - Full Stack Developer</h6>
         <NavLinks expanded={expanded}>
-          <StyledLink to="/" activeStyle={{fontWeight: '700', color: 'black'}}>Home</StyledLink>
-          <StyledLink to="/about" activeStyle={{fontWeight: '700', color: 'black'}}>About</StyledLink>
-          <StyledLink to="/work" activeStyle={{fontWeight: '700', color: 'black'}}>Work</StyledLink>
-          <StyledLink to="/blog" activeStyle={{fontWeight: '700', color: 'black'}}>Blog</StyledLink>
-          <StyledLink to="/contact" activeStyle={{fontWeight: '700', color: 'black'}}>Contact</StyledLink>
+          <Link to="/" activeStyle={{fontWeight: '700', color: 'black'}}>Home</Link>
+          <Link to="/about" activeStyle={{fontWeight: '700', color: 'black'}}>About</Link>
+          <Link to="/work" activeStyle={{fontWeight: '700', color: 'black'}}>Work</Link>
+          <a href="https://blog.matthewcross.me">Blog</a>
+          <Link to="/contact" activeStyle={{fontWeight: '700', color: 'black'}}>Contact</Link>
         </NavLinks>
-        <StyledIcon expanded={expanded} icon={faArrowAltCircleDown} onClick={() => setExpanded(!expanded)}/>
+        <StyledIcon expanded={expanded} icon={faChevronDown} onClick={() => setExpanded(!expanded)}/>
       </NavContents>
     </NavBar>
   )
