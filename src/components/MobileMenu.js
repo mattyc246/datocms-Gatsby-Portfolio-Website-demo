@@ -11,10 +11,10 @@ const NavBar = styled.nav`
   transition: all 2000ms cubic-bezier(0.39, 1.52, 0.46, 0.92);
   position: fixed;
   top: ${(props) => (props.expanded ? "0" : "calc(-100vh + 50px)")};
-  box-shadow: 10px 10px 30px rgba(0,0,0,0.1);
+  box-shadow: 0px 0px 30px rgba(0,0,0,0.1);
   z-index: 999;
 
-  @media screen and (min-width: 740px) {
+  @media screen and (min-width: 640px) {
     display: none;
   }
 `;
