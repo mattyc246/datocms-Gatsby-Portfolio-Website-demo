@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components"
 import { graphql } from 'gatsby'
 import Layout from "../components/layout";
-import ContentContainer from "../components/ContentContainer";
 import ContactForm from "../components/ContactForm";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons'

@@ -26,7 +26,7 @@ const Content = styled.main`
 const SideName = styled.p`
   display: none;
   position: fixed;
-  left: 1.5vw;
+  left: 1vw;
   top: 50%;
   height: 100vh;
   transform: translate(0%, -50%) rotate(180deg);
