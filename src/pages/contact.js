@@ -36,55 +36,53 @@ const IconLink = styled.a`
 const Contact = ({ data: { datoCmsContact } }) => {
   return (
     <Layout seo={datoCmsContact.seoMetaTags}>
-      <ContentContainer>
-        <h1>Contact me</h1>
-        <div className="row">
-          <div className="col-12 col-lg-7">
-            <ContactForm />
-          </div>
-          <div className="col-12 col-lg-5">
-            <h5 className="my-4 text-center">Email me directly</h5>
-            <IconLink href="mailto:mattjcrossdev@gmail.com">
-              <FontAwesomeIcon icon={faEnvelope} />
-              mattjcrossdev@gmail.com
-            </IconLink>
-            <hr />
-            <h5 className="my-4 text-center">Social Media</h5>
-            <IconLink
-              className="my-4"
-              href="https://www.github.com/mattyc246"
-              target="_blank"
-            >
-              <FontAwesomeIcon icon={faGithubSquare} />
-              Github
-            </IconLink>
-            <IconLink
-              className="my-4"
-              href="https://www.facebook.com/mattyc246"
-              target="_blank"
-            >
-              <FontAwesomeIcon icon={faFacebookSquare} />
-              Facebook
-            </IconLink>
-            <IconLink
-              className="my-4"
-              href="https://www.linkedin.com/in/matthew-cross/"
-              target="_blank"
-            >
-              <FontAwesomeIcon icon={faLinkedin} />
-              LinkedIn
-            </IconLink>
-            <IconLink
-              className="my-4"
-              href="https://www.instagram.com/mattyc246"
-              target="_blank"
-            >
-              <FontAwesomeIcon icon={faInstagram} />
-              Instagram
-            </IconLink>
-          </div>
+      <h1>Contact me</h1>
+      <div className="row">
+        <div className="col-12 col-lg-7">
+          <ContactForm />
         </div>
-      </ContentContainer>
+        <div className="col-12 col-lg-5">
+          <h5 className="my-4 text-center">Email me directly</h5>
+          <IconLink href="mailto:mattjcrossdev@gmail.com">
+            <FontAwesomeIcon icon={faEnvelope} />
+            mattjcrossdev@gmail.com
+          </IconLink>
+          <hr />
+          <h5 className="my-4 text-center">Social Media</h5>
+          <IconLink
+            className="my-4"
+            href="https://www.github.com/mattyc246"
+            target="_blank"
+          >
+            <FontAwesomeIcon icon={faGithubSquare} />
+            Github
+          </IconLink>
+          <IconLink
+            className="my-4"
+            href="https://www.facebook.com/mattyc246"
+            target="_blank"
+          >
+            <FontAwesomeIcon icon={faFacebookSquare} />
+            Facebook
+          </IconLink>
+          <IconLink
+            className="my-4"
+            href="https://www.linkedin.com/in/matthew-cross/"
+            target="_blank"
+          >
+            <FontAwesomeIcon icon={faLinkedin} />
+            LinkedIn
+          </IconLink>
+          <IconLink
+            className="my-4"
+            href="https://www.instagram.com/mattyc246"
+            target="_blank"
+          >
+            <FontAwesomeIcon icon={faInstagram} />
+            Instagram
+          </IconLink>
+        </div>
+      </div>
     </Layout>
   );
 };

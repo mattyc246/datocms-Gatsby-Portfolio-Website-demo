@@ -9,6 +9,7 @@ import "../styles/index.scss";
 
 const Content = styled.main`
   width: 100vw;
+  min-height: 100vh;
   padding: 15vw 3vw 3vw 3vw;
   transition: width 1200ms cubic-bezier(0.39, 1.52, 0.46, 0.92);
 
@@ -34,7 +35,7 @@ const SideName = styled.p`
   letter-spacing: 7px;
   text-align: center!important;
   text-transform: uppercase;
-  font-weight: 600;
+  font-weight: 800;
 
   @media screen and (min-width: 640px){
     display: block;
@@ -42,7 +43,7 @@ const SideName = styled.p`
 `;
 
 const TemplateWrapper = ({ children, seo }) => {
-  const [navOpen, setNavOpen] = useState(true)
+  const [navOpen, setNavOpen] = useState(false)
 
   return (
     <StaticQuery

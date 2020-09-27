@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { Link } from "gatsby";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
+import AniLink from "gatsby-plugin-transition-link/AniLink";
 
 const FloatyNav = styled.header`
   display: none;
@@ -42,6 +43,11 @@ const FloatyNav = styled.header`
 `;
 
 const StyledIcon = styled(FontAwesomeIcon)`
+  @keyframes bouncyArrow {
+    0% {right: 150px;}
+    100% {right: 140px;}
+  }
+
   font-size: 34px;
   cursor: pointer;
   color: black;
@@ -51,7 +57,7 @@ const StyledIcon = styled(FontAwesomeIcon)`
     props.navOpen ? "transform: rotate(180deg);" : "transform: rotate(0deg);"}
   transition: all 1200ms cubic-bezier(0.39, 1.52, 0.46, 0.92);
   position: relative;
-  right: 150px;
+  animation: bouncyArrow 1000ms infinite alternate-reverse;
 
   :hover {
     opacity: 1;
@@ -101,21 +107,21 @@ const NavBar = ({navOpen, setNavOpen}) => {
       />
       <p>Navigation</p>
       <FlexyLinks>
-        <Link to="/">
+        <AniLink cover bg="#000000" direction="up" to="/">
           <span></span>Home<span></span>
-        </Link>
-        <Link to="/about">
+        </AniLink>
+        <AniLink cover bg="#000000" direction="right" to="/about">
           <span></span>About<span></span>
-        </Link>
-        <Link to="/work">
+        </AniLink>
+        <AniLink cover bg="#000000" direction="left" to="/work">
           <span></span>Work<span></span>
-        </Link>
+        </AniLink>
         <a href="https://blog.matthewcross.me">
           <span></span>Blog<span></span>
         </a>
-        <Link to="/contact">
+        <AniLink cover bg="#000000" direction="down" to="/contact">
           <span></span>Contact<span></span>
-        </Link>
+        </AniLink>
       </FlexyLinks>
     </FloatyNav>
   );

@@ -3,6 +3,7 @@ import styled from "styled-components";
 import {Link} from 'gatsby'
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faChevronDown} from "@fortawesome/free-solid-svg-icons"
+import AniLink from "gatsby-plugin-transition-link/AniLink"
 
 const NavBar = styled.nav`
   width: 100%;
@@ -78,16 +79,52 @@ const MobileMenu = () => {
       <NavContents>
         <h6>Matthew Cross - Full Stack Developer</h6>
         <NavLinks expanded={expanded}>
-          <Link to="/" activeStyle={{fontWeight: '700', color: 'black'}}>Home</Link>
-          <Link to="/about" activeStyle={{fontWeight: '700', color: 'black'}}>About</Link>
-          <Link to="/work" activeStyle={{fontWeight: '700', color: 'black'}}>Work</Link>
+          <AniLink
+            cover
+            bg="#000000"
+            direction="up"
+            to="/"
+            activeStyle={{ fontWeight: "700", color: "black" }}
+          >
+            Home
+          </AniLink>
+          <AniLink
+          cover
+            bg="#000000"
+            direction="left"
+            to="/about"
+            activeStyle={{ fontWeight: "700", color: "black" }}
+          >
+            About
+          </AniLink>
+          <AniLink
+            cover
+            bg="#000000"
+            direction="right"
+            to="/work"
+            activeStyle={{ fontWeight: "700", color: "black" }}
+          >
+            Work
+          </AniLink>
           <a href="https://blog.matthewcross.me">Blog</a>
-          <Link to="/contact" activeStyle={{fontWeight: '700', color: 'black'}}>Contact</Link>
+          <AniLink
+            cover
+            bg="#000000"
+            direction="down"
+            to="/contact"
+            activeStyle={{ fontWeight: "700", color: "black" }}
+          >
+            Contact
+          </AniLink>
         </NavLinks>
-        <StyledIcon expanded={expanded} icon={faChevronDown} onClick={() => setExpanded(!expanded)}/>
+        <StyledIcon
+          expanded={expanded}
+          icon={faChevronDown}
+          onClick={() => setExpanded(!expanded)}
+        />
       </NavContents>
     </NavBar>
-  )
+  );
 }
 
 export default MobileMenu;
