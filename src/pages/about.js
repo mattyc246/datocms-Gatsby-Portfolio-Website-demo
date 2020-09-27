@@ -4,99 +4,95 @@ import { graphql } from "gatsby";
 import { HelmetDatoCms } from "gatsby-source-datocms";
 import Img from "gatsby-image";
 import Layout from "../components/layout";
-import ContentContainer from "../components/ContentContainer";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faFacebookSquare, faGithubSquare, faInstagramSquare, faLinkedin } from "@fortawesome/free-brands-svg-icons";
 
-const TechContainer = styled.div`
+const TextContainer = styled.div`
+  display: flex;
+  height: 100%;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+`;
+
+const FlexyTechs = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
   flex-wrap: wrap;
-`;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
 
-const Stack = styled.div`
-  width: 80px;
-  height: 80px;
-  margin: 1.5rem;
-  background-image: url(${(props) => props.imgUrl});
-  background-size: contain;
-  background-position: center;
-  background-repeat: no-repeat;
-  border-radius: 5px;
-
-  div {
-    opacity: 0;
-    display: flex;
-    transition: 0.3s ease-in-out;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    width: 100%;
-    cursor: pointer;
+  img {
+    width: 70px;
+    margin: 0.5rem;
+    transition: all 500ms ease-in-out;
 
     :hover {
-      opacity: 1;
-      background-color: rgba(255, 255, 255, 0.5);
-      color: black;
-      transition: 0.3s ease-in-out;
+      transform: scale(1.75);
+      cursor: pointer;
+      transition: all 500ms ease-in-out;
     }
   }
-
-  @media screen and (min-width: 740px) {
-    width: 150px;
-    height: 150px;
-  }
 `;
+
+const FlexySocials = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0.5rem 0;
+
+  a {
+    font-size: 38px;
+  }
+`
 
 const About = ({ data: { about } }) => {
   return (
     <Layout>
-      <ContentContainer dark>
-        <HelmetDatoCms seo={about.seoMetaTags} />
-        <h1 className="my-3">{about.title}</h1>
-        <div
-          dangerouslySetInnerHTML={{
-            __html: about.subtitleNode.childMarkdownRemark.html,
-          }}
-          data-sal="slide-left"
-          data-sal-duration="500"
-        />
-      </ContentContainer>
-      <ContentContainer>
-        <Img fluid={about.photo.fluid} />
-        <h4 className="my-4">Background</h4>
-        <div
-          className="sheet__body"
-          dangerouslySetInnerHTML={{
-            __html: about.bioNode.childMarkdownRemark.html,
-          }}
-          data-sal="slide-up"
-          data-sal-duration="500"
-        />
-      </ContentContainer>
-      <ContentContainer dark>
-        <h4 className="my-4">Tech Stack</h4>
-        <div
-          className="sheet__body"
-          dangerouslySetInnerHTML={{
-            __html: about.techStackBioNode.childMarkdownRemark.html,
-          }}
-          data-sal="slide-up"
-          data-sal-duration="500"
-        />
-      </ContentContainer>
-      <ContentContainer>
-        <TechContainer data-sal="zoom-in" data-sal-duration="500">
-          {about.techStacks.map((stack, idx) => {
-            return (
-              <Stack key={idx} imgUrl={stack.url}>
-                <div>
-                  <h6 className="text-center">{stack.title}</h6>
-                </div>
-              </Stack>
-            );
-          })}
-        </TechContainer>
-      </ContentContainer>
+      <HelmetDatoCms seo={about.seoMetaTags} />
+      <div className="row">
+        <div className="col-md-4">
+          <h1 className="text-center">{about.title}</h1>
+          <Img className="rounded-circle my-4" fluid={about.photo.fluid} />
+          <FlexySocials>
+            <a href="https://www.facebook.com/mattyc246">
+              <FontAwesomeIcon icon={faFacebookSquare} />
+            </a>
+            <a href="https://www.instagram.com/mattyc246">
+              <FontAwesomeIcon icon={faInstagramSquare} />
+            </a>
+            <a href="https://www.github.com/mattyc246">
+              <FontAwesomeIcon icon={faGithubSquare} />
+            </a>
+            <a href="https://www.linkedin.com/in/matthew-cross">
+              <FontAwesomeIcon icon={faLinkedin} />
+            </a>
+          </FlexySocials>
+        </div>
+        <div className="col-md-7 offset-md-1">
+          <TextContainer>
+            <div
+              className="sheet__body"
+              dangerouslySetInnerHTML={{
+                __html: about.bioNode.childMarkdownRemark.html,
+              }}
+              data-sal="slide-up"
+              data-sal-duration="500"
+            />
+          </TextContainer>
+        </div>
+      </div>
+      <div className="row">
+        <div className="col">
+          <h6 className="my-3">What I use...</h6>
+          <FlexyTechs>
+            {about.techStacks.map((stack) => {
+              return <img key={stack.id} src={stack.url} alt={stack.title} />;
+            })}
+          </FlexyTechs>
+        </div>
+      </div>
     </Layout>
   );
 };
@@ -104,37 +100,41 @@ const About = ({ data: { about } }) => {
 export default About;
 
 export const query = graphql`
-  query AboutQuery {
-    about: datoCmsAbout {
-      seoMetaTags {
-        ...GatsbyDatoCmsSeoMetaTags
-      }
-      title
-      subtitleNode {
-        childMarkdownRemark {
-          html
-        }
-      }
-      photo {
-        fluid(maxWidth: 600, imgixParams: { fm: "jpg", auto: "compress" }) {
-          ...GatsbyDatoCmsSizes
-        }
-      }
-      bioNode {
-        childMarkdownRemark {
-          html
-        }
-      }
-      techStackBioNode {
-        childMarkdownRemark {
-          html
-        }
-      }
-      techStacks {
-        url
-        title
-        alt
-      }
-    }
-  }
-`;
+         query AboutQuery {
+           about: datoCmsAbout {
+             seoMetaTags {
+               ...GatsbyDatoCmsSeoMetaTags
+             }
+             title
+             subtitleNode {
+               childMarkdownRemark {
+                 html
+               }
+             }
+             photo {
+               fluid(
+                 maxWidth: 600
+                 imgixParams: { fm: "jpg", auto: "compress" }
+               ) {
+                 ...GatsbyDatoCmsSizes
+               }
+             }
+             bioNode {
+               childMarkdownRemark {
+                 html
+               }
+             }
+             techStackBioNode {
+               childMarkdownRemark {
+                 html
+               }
+             }
+             techStacks {
+               originalId
+               url
+               title
+               alt
+             }
+           }
+         }
+       `;

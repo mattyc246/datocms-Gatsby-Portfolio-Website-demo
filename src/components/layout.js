@@ -19,7 +19,7 @@ const Content = styled.main`
 
   @media screen and (min-width: 640px) {
     width: ${(props) => (props.navOpen ? "calc(100vw - 250px)" : "100vw")};
-    padding: 3vw 7vw 3vw 7vw;
+    padding: 3vw 7vw 3vw 8vw;
   }
 `;
 
