@@ -12,6 +12,7 @@ module.exports = {
     `gatsby-plugin-styled-components`,
     `gatsby-plugin-recaptcha`,
     `gatsby-plugin-transition-link`,
+    `gatsby-plugin-sharp`,
     {
       resolve: `gatsby-source-datocms`,
       options: {
