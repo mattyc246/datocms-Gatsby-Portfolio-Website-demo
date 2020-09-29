@@ -2,16 +2,31 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { graphql } from "gatsby";
 import Layout from "../components/layout";
-import Img from "gatsby-image"
+import Img from "gatsby-image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronLeft, faChevronRight } from "@fortawesome/free-solid-svg-icons";
+import {
+  faChevronLeft,
+  faChevronRight,
+} from "@fortawesome/free-solid-svg-icons";
 
 const TechContainer = styled.div`
+  width: 100%;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-evenly;
   align-items: center;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  padding: 1rem;
+
+  @media screen and (min-width: 640px) {
+    width: auto;
+    background-color: white;
+    box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.2);
+    flex-direction: column;
+  }
 `;
 
 const TechBox = styled.div`
@@ -29,7 +44,7 @@ const SiteLink = styled.a`
   width: 200px;
   padding: 1rem;
   text-align: center;
-  background-color: rgb(0,0,0);
+  background-color: rgb(0, 0, 0);
   color: white;
   border-radius: 3px;
   font-weight: 700;
@@ -45,33 +60,50 @@ const SiteLink = styled.a`
   }
 `;
 
-const ColumnContent = styled.div`
-  width: 100%;
-  height: calc(100vh - 18vw);
+const PageIndicatorContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  left: 0;
 
-  @media screen and (min-width: 640px) {
-    height: calc(100vh - 6vw);
+  span {
+    font-size: 24px;
+    transition: font-size 500ms ease-in-out;
+    line-height: 18px;
+  }
+  .active {
+    font-size: 36px;
+    transition: font-size 500ms ease-in-out;
   }
 `;
 
-const WorkCard = styled.div`
+const WorkCard = styled.article`
   width: 100%;
-  height: 100%;
-  box-shadow: 10px 10px 25px rgba(0, 0, 0, 0.2);
-  padding: 3rem;
+  display: ${(props) => (props.active ? "block" : "none")};
+  min-height: calc(100vh - 18vw);
+  padding: 0 7vw;
   position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
 
-  @media screen and (min-width: 640px){
-    padding: 2rem 6rem;
+  .fadeOut {
+    opacity: 0;
+    width: 0;
+    height: 0;
+    transition: width 0.5s 0.5s, height 0.5s 0.5s, opacity 0.5s;
+  }
+  .fadeIn {
+    opacity: 1;
+    width: 100%;
+    min-height: calc(100vh - 18vw);
+    transition: width 0.5s, height 0.5s, opacity 0.5s 0.5s;
   }
 
   .left-arrow {
     position: absolute;
     top: 50%;
-    left: 10px;
+    left: 5px;
     transform: translate(0%, -50%);
     font-size: 36px;
     cursor: pointer;
@@ -80,105 +112,103 @@ const WorkCard = styled.div`
   .right-arrow {
     position: absolute;
     top: 50%;
-    right: 10px;
+    right: 5px;
     transform: translate(0%, -50%);
     font-size: 36px;
     cursor: pointer;
   }
+
+  @media screen and (min-width: 640px) {
+    padding: 0 3vw;
+    min-height: calc(100vh - 6vw);
+  }
 `;
 
-const PageIndicatorContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
+const FloatyBox = styled.div`
+  min-width: 50vw;
+  background-color: white;
+  box-shadow: 10px 10px 25px rgba(0, 0, 0, 0.2);
+  margin-top: 1rem;
+  padding: 1rem;
 
-  span {
-    font-size: 24px;
-    transition: font-size 500ms ease-in-out;
-
-  }
-  .active {
-    font-size: 36px;
-    transition: font-size 500ms ease-in-out;
+  @media screen and (min-width: 640px) {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    max-width: 50vw;
   }
 `;
 
 const Work = ({ data: { work } }) => {
   const [activeProject, setActiveProject] = useState(0);
 
-  const {projects} = work
+  const { projects } = work;
 
   const moveLeft = () => {
-    if(activeProject === 0){
-      setActiveProject(projects.length - 1)
+    if (activeProject === 0) {
+      setActiveProject(projects.length - 1);
     } else {
-      setActiveProject(activeProject - 1)
+      setActiveProject(activeProject - 1);
     }
   };
 
   const moveRight = () => {
-    if(activeProject === projects.length - 1){
-      setActiveProject(0)
+    if (activeProject === projects.length - 1) {
+      setActiveProject(0);
     } else {
-      setActiveProject(activeProject + 1)
+      setActiveProject(activeProject + 1);
     }
   };
 
-
   return (
     <Layout seo={work.seoMetaTags}>
-      <div className="row">
-        <div className="col-md-5">
-          <h1 className="my-4">Work</h1>
-          <div
-            dangerouslySetInnerHTML={{
-              __html: work.bioNode.childMarkdownRemark.html,
-            }}
-          />
-        </div>
-        <div className="col-md-7">
-          <ColumnContent>
-            <WorkCard>
-              <FontAwesomeIcon className="left-arrow" icon={faChevronLeft} onClick={moveLeft} />
-              <FontAwesomeIcon className="right-arrow" icon={faChevronRight} onClick={moveRight} />
-              <Img
-                fluid={projects[activeProject].coverImage.fluid}
-                alt={projects[activeProject].coverImage.alt}
-              />
+      {projects.map((project, idx) => {
+        return (
+          <WorkCard key={idx} active={activeProject === idx ? true : false}>
+            <Img
+              fluid={project.coverImage.fluid}
+              alt={project.coverImage.alt}
+            />
+            <FloatyBox>
               <div className="d-flex justify-content-between align-items-center">
-                <h4 className="my-2">{projects[activeProject].projectName}</h4>
-                <SiteLink className="my-2" href={projects[activeProject].siteUrl}>
+                <h4 className="my-2">{project.projectName}</h4>
+                <SiteLink className="my-2" href={project.siteUrl}>
                   View Site
                 </SiteLink>
               </div>
               <div
                 dangerouslySetInnerHTML={{
-                  __html:
-                    projects[activeProject].descriptionNode.childMarkdownRemark.html,
+                  __html: project.descriptionNode.childMarkdownRemark.html,
                 }}
               />
-              <TechContainer>
-                {projects[activeProject].languages.map((language, id) => {
-                  return (
-                    <TechBox
-                      key={id}
-                      bgImg={language.url}
-                    />
-                  );
-                })}
-              </TechContainer>
-              <PageIndicatorContainer>
-                {projects.map((project, indx) => {
-                    return(
-                      <span className={activeProject === indx ? 'active' : ''}>&bull;</span>
-                    )
-                })}
-              </PageIndicatorContainer>
-            </WorkCard>
-          </ColumnContent>
-        </div>
-      </div>
+            </FloatyBox>
+            <TechContainer>
+              {project.languages.map((language, id) => {
+                return <TechBox key={id} bgImg={language.url} />;
+              })}
+            </TechContainer>
+            <FontAwesomeIcon
+              className="left-arrow"
+              icon={faChevronLeft}
+              onClick={moveLeft}
+            />
+            <FontAwesomeIcon
+              className="right-arrow"
+              icon={faChevronRight}
+              onClick={moveRight}
+            />
+            <PageIndicatorContainer>
+              {projects.map((project, indx) => {
+                return (
+                  <span className={activeProject === indx ? "active" : ""}>
+                    &bull;
+                  </span>
+                );
+              })}
+            </PageIndicatorContainer>
+          </WorkCard>
+        );
+      })}
     </Layout>
   );
 };
@@ -186,38 +216,35 @@ const Work = ({ data: { work } }) => {
 export default Work;
 
 export const pageQuery = graphql`
-         query WorkQuery {
-           work: datoCmsWork {
-             seoMetaTags {
-               ...GatsbyDatoCmsSeoMetaTags
-             }
-             bioNode {
-               childMarkdownRemark {
-                 html
-               }
-             }
-             projects {
-               projectName
-               descriptionNode {
-                 childMarkdownRemark {
-                   html
-                 }
-               }
-               groupProject
-               coverImage {
-                 fluid(
-                   maxWidth: 600
-                   imgixParams: { fm: "jpg", auto: "compress" }
-                 ) {
-                   ...GatsbyDatoCmsSizes
-                 }
-                 alt
-               }
-               languages {
-                 url
-               }
-               siteUrl
-             }
-           }
-         }
-       `;
+  query WorkQuery {
+    work: datoCmsWork {
+      seoMetaTags {
+        ...GatsbyDatoCmsSeoMetaTags
+      }
+      bioNode {
+        childMarkdownRemark {
+          html
+        }
+      }
+      projects {
+        projectName
+        descriptionNode {
+          childMarkdownRemark {
+            html
+          }
+        }
+        groupProject
+        coverImage {
+          fluid(maxWidth: 1200, imgixParams: { fm: "jpg", auto: "compress" }) {
+            ...GatsbyDatoCmsSizes
+          }
+          alt
+        }
+        languages {
+          url
+        }
+        siteUrl
+      }
+    }
+  }
+`;
