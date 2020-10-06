@@ -9,8 +9,8 @@ import { faFacebookSquare, faLinkedin, faGithubSquare, faInstagram } from "@fort
 
 const IconLink = styled.a`
   display: flex;
-  width: 80%;
-  margin: 0 auto;
+  font-size: 64px;
+  margin: 1rem;
   justify-content: space-between;
   align-items: center;
   text-align: center;
@@ -21,67 +21,66 @@ const IconLink = styled.a`
     color: rgba(0,0,0,0.8);
     text-decoration: none;
   }
+`;
 
-  svg {
-    font-size: 36px;
-    margin-right: 2rem;
+const SocialLinks = styled.div`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+`
+
+const FormContent = styled.div`
+  width: 100%;
+  min-height: calc(80vh - 9vw);
+  position: relative;
+
+  @media screen and (min-width: 640px){
+    min-height: calc(80vh - 6vw);
   }
+`
 
-  @media screen and (min-width: 740px){
-    width: 50%;
+const SocialContent = styled.div`
+  width: 100%;
+  min-height: calc(20vh - 9vw);
+
+  @media screen and (min-width: 640px){
+    min-height: calc(20vh - 6vw);
   }
 `;
 
 const Contact = ({ data: { datoCmsContact } }) => {
   return (
     <Layout seo={datoCmsContact.seoMetaTags}>
-      <h1>Contact me</h1>
-      <div className="row">
-        <div className="col-12 col-lg-7">
-          <ContactForm />
-        </div>
-        <div className="col-12 col-lg-5">
-          <h5 className="my-4 text-center">Email me directly</h5>
+      <FormContent>
+        <ContactForm />
+      </FormContent>
+      <SocialContent>
+        <h5 className="text-center">
+          I'm socially awkward, but here's my socials anyway...
+        </h5>
+        <SocialLinks>
           <IconLink href="mailto:mattjcrossdev@gmail.com">
             <FontAwesomeIcon icon={faEnvelope} />
-            mattjcrossdev@gmail.com
           </IconLink>
-          <hr />
-          <h5 className="my-4 text-center">Social Media</h5>
-          <IconLink
-            className="my-4"
-            href="https://www.github.com/mattyc246"
-            target="_blank"
-          >
+          <IconLink href="https://www.github.com/mattyc246" target="_blank">
             <FontAwesomeIcon icon={faGithubSquare} />
-            Github
           </IconLink>
-          <IconLink
-            className="my-4"
-            href="https://www.facebook.com/mattyc246"
-            target="_blank"
-          >
+          <IconLink href="https://www.facebook.com/mattyc246" target="_blank">
             <FontAwesomeIcon icon={faFacebookSquare} />
-            Facebook
           </IconLink>
           <IconLink
-            className="my-4"
             href="https://www.linkedin.com/in/matthew-cross/"
             target="_blank"
           >
             <FontAwesomeIcon icon={faLinkedin} />
-            LinkedIn
           </IconLink>
-          <IconLink
-            className="my-4"
-            href="https://www.instagram.com/mattyc246"
-            target="_blank"
-          >
+          <IconLink href="https://www.instagram.com/mattyc246" target="_blank">
             <FontAwesomeIcon icon={faInstagram} />
-            Instagram
           </IconLink>
-        </div>
-      </div>
+        </SocialLinks>
+      </SocialContent>
     </Layout>
   );
 };
