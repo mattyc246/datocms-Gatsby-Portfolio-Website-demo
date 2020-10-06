@@ -23,10 +23,9 @@ const TechContainer = styled.div`
     left: 2vw;
     bottom: 0;
     width: auto;
+    max-width: 40vw;
     background-color: white;
     border-radius: 3px;
-    box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.2);
-    flex-direction: column;
   }
 `;
 
@@ -93,12 +92,12 @@ const WorkCard = styled.article`
   ${(props) => (props.active ? `` : `display: none;`)}
 
   .shadowy {
-    box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(0,0,0,0.1);
     border-radius: 3px;
     width: 100%;
 
     @media screen and (min-width: 940px) {
-      width: 85%;
+      width: 95%;
     }
   }
 
@@ -127,15 +126,14 @@ const WorkCard = styled.article`
 const FloatyBox = styled.div`
   background-color: white;
   border-radius: 3px;
-  box-shadow: 10px 10px 25px rgba(0, 0, 0, 0.2);
   margin-top: 1rem;
   padding: 1rem;
 
   @media screen and (min-width: 940px) {
     position: absolute;
-    bottom: 0;
+    bottom: 5vw;
     right: 3vw;
-    max-width: 60%;
+    width: 40vw;
   }
 `;
 
@@ -154,20 +152,23 @@ const CardsContainer = styled.div`
 
   .left-arrow {
     position: absolute;
+    padding: 5px;
+    background-color: rgba(255, 255, 255, 0.5);
     top: 50%;
     left: 0px;
     transform: translate(0%, -50%);
-    font-size: 36px;
+    font-size: 48px;
     cursor: pointer;
     z-index: 3;
   }
 
   .right-arrow {
     position: absolute;
+    padding: 5px;
     top: 50%;
     right: 5px;
     transform: translate(0%, -50%);
-    font-size: 36px;
+    font-size: 48px;
     cursor: pointer;
     z-index: 3;
   }
@@ -178,7 +179,7 @@ const CardsContainer = styled.div`
 
     h1 {
       position: absolute;
-      top: 0;
+      bottom: 0;
       right: 0;
       z-index: 3;
       padding: 1rem;
@@ -241,17 +242,16 @@ const Work = ({ data: { work } }) => {
                 alt={project.coverImage.alt}
               />
               <FloatyBox>
-                <div className="d-flex justify-content-between align-items-center">
-                  <h4 className="my-3">{project.projectName}</h4>
-                  <SiteLink className="my-3" href={project.siteUrl}>
-                    View Site
-                  </SiteLink>
-                </div>
+                <h4 className="my-3">{project.projectName}</h4>
                 <div
+                  className="my-4"
                   dangerouslySetInnerHTML={{
                     __html: project.descriptionNode.childMarkdownRemark.html,
                   }}
                 />
+                <SiteLink className="my-4 mx-auto" href={project.siteUrl}>
+                  View Site
+                </SiteLink>
               </FloatyBox>
               <TechContainer>
                 {project.languages.map((language, id) => {
