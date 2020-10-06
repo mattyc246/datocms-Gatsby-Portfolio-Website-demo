@@ -1,15 +1,32 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { graphql } from "gatsby";
 import Layout from "../components/layout";
-import ContentContainer from "../components/ContentContainer";
+import Img from "gatsby-image";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faChevronLeft,
+  faChevronRight,
+} from "@fortawesome/free-solid-svg-icons";
 
 const TechContainer = styled.div`
+  width: 100%;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-evenly;
   align-items: center;
+  padding: 1rem;
+
+  @media screen and (min-width: 640px) {
+    position: absolute;
+    left: 2vw;
+    bottom: 0;
+    width: auto;
+    background-color: white;
+    box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.2);
+    flex-direction: column;
+  }
 `;
 
 const TechBox = styled.div`
@@ -27,79 +44,181 @@ const SiteLink = styled.a`
   width: 200px;
   padding: 1rem;
   text-align: center;
-  background-color: rgb(128, 255, 212);
-  ${(props) => (props.centered ? "margin: 0 auto;" : "")}
-  ${(props) => (props.dark ? "color: black;" : "")}
+  background-color: rgb(0, 0, 0);
+  color: white;
   border-radius: 3px;
   font-weight: 700;
   transition: 0.5s ease-in-out;
   outline: none;
+  border: 2px solid black;
 
   :hover {
     text-decoration: none;
-    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
-    transform: scale(1.05);
-    transition: 0.5s ease-in-out;
+    background-color: transparent;
+    color: black;
+    transition: all 0.5s ease-in-out;
+  }
+`;
+
+const PageIndicatorContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  span {
+    font-size: 24px;
+    transition: font-size 500ms ease-in-out;
+    line-height: 18px;
+  }
+  .active {
+    font-size: 36px;
+    transition: font-size 500ms ease-in-out;
+  }
+`;
+
+const WorkCard = styled.article`
+  position: relative;
+
+  ${props => props.active ? `
+    opacity: 1;
+    width: 100%;
+    height: 100%;
+    transition: width 0.5s, height 0.5s, opacity 0.5s 0.5s;
+  ` : `
+    opacity: 0;
+    width: 0;
+    height: 0;
+    transition: width 0.5s 0.5s, height 0.5s 0.5s, opacity 0.5s;
+  `}
+
+  .shadowy {
+    box-shadow: 10px 10px 15px rgba(0,0,0,0.2);
+  }
+`;
+
+const FloatyBox = styled.div`
+  /* min-width: 50vw; */
+  background-color: white;
+  box-shadow: 10px 10px 25px rgba(0, 0, 0, 0.2);
+  margin-top: 1rem;
+  padding: 1rem;
+
+  @media screen and (min-width: 640px) {
+    position: absolute;
+    bottom: 0;
+    right: 3vw;
+    max-width: 60%;
+  }
+`;
+
+const CardsContainer = styled.div`
+  width: 100%;
+  display: block;
+  height: calc(100vh - 18vw);
+  padding: 0 7vw;
+  position: relative;
+
+  .left-arrow {
+    position: absolute;
+    top: 50%;
+    left: 5px;
+    transform: translate(0%, -50%);
+    font-size: 36px;
+    cursor: pointer;
+  }
+
+  .right-arrow {
+    position: absolute;
+    top: 50%;
+    right: 5px;
+    transform: translate(0%, -50%);
+    font-size: 36px;
+    cursor: pointer;
+  }
+
+  @media screen and (min-width: 640px) {
+    padding: 0 3rem;
+    height: calc(100vh - 6vw);
   }
 `;
 
 const Work = ({ data: { work } }) => {
+  const [activeProject, setActiveProject] = useState(0);
+
+  const { projects } = work;
+
+  const moveLeft = () => {
+    if (activeProject === 0) {
+      setActiveProject(projects.length - 1);
+    } else {
+      setActiveProject(activeProject - 1);
+    }
+  };
+
+  const moveRight = () => {
+    if (activeProject === projects.length - 1) {
+      setActiveProject(0);
+    } else {
+      setActiveProject(activeProject + 1);
+    }
+  };
+
   return (
     <Layout seo={work.seoMetaTags}>
-      <ContentContainer dark>
-        <h1 className="my-4">Work</h1>
-        <div
-          dangerouslySetInnerHTML={{
-            __html: work.bioNode.childMarkdownRemark.html,
-          }}
-          data-sal="zoom-in"
-          data-sal-duration="500"
+      <CardsContainer>
+        <PageIndicatorContainer>
+          {projects.map((project, indx) => {
+            return (
+              <span className={activeProject === indx ? "active" : ""}>
+                &bull;
+              </span>
+            );
+          })}
+        </PageIndicatorContainer>
+        <FontAwesomeIcon
+          className="left-arrow"
+          icon={faChevronLeft}
+          onClick={moveLeft}
         />
-      </ContentContainer>
-      <ContentContainer>
-        {work.projects.map((project, idx) => {
+        <FontAwesomeIcon
+          className="right-arrow"
+          icon={faChevronRight}
+          onClick={moveRight}
+        />
+        {projects.map((project, idx) => {
           return (
-            <>
-              <h4 className="my-2">{project.projectName}</h4>
-              <div key={idx} className="row my-4">
-                <div className="col-12 col-lg-4">
-                  <img
-                    src={project.coverImage.url}
-                    alt={project.coverImage.alt}
-                    width="100%"
-                  />
-                  <SiteLink className="my-2" href={project.siteUrl} centered>
+            <WorkCard key={idx} active={activeProject === idx ? true : false}>
+              <Img
+                className="shadowy"
+                fluid={project.coverImage.fluid}
+                alt={project.coverImage.alt}
+              />
+              <FloatyBox>
+                <div className="d-flex justify-content-between align-items-center">
+                  <h4 className="my-3">{project.projectName}</h4>
+                  <SiteLink className="my-3" href={project.siteUrl}>
                     View Site
                   </SiteLink>
                 </div>
-                <div className="col-12 col-lg-8">
-                  <h6 className="my-3">Project Description</h6>
-                  <div
-                    dangerouslySetInnerHTML={{
-                      __html: project.descriptionNode.childMarkdownRemark.html,
-                    }}
-                    data-sal="slide-left"
-                    data-sal-duration="500"
-                  />
-                  <h6 className="my-3">Technology Used</h6>
-                  <TechContainer>
-                    {project.languages.map((language, id) => {
-                      return (
-                        <TechBox
-                          key={id}
-                          bgImg={language.url}
-                          data-sal="zoom-in"
-                          data-sal-duration="500"
-                        />
-                      );
-                    })}
-                  </TechContainer>
-                </div>
-              </div>
-            </>
+                <div
+                  dangerouslySetInnerHTML={{
+                    __html: project.descriptionNode.childMarkdownRemark.html,
+                  }}
+                />
+              </FloatyBox>
+              <TechContainer>
+                {project.languages.map((language, id) => {
+                  return <TechBox key={id} bgImg={language.url} />;
+                })}
+              </TechContainer>
+            </WorkCard>
           );
         })}
-      </ContentContainer>
+      </CardsContainer>
     </Layout>
   );
 };
@@ -126,7 +245,9 @@ export const pageQuery = graphql`
         }
         groupProject
         coverImage {
-          url
+          fluid(maxWidth: 1200, imgixParams: { fm: "jpg", auto: "compress" }) {
+            ...GatsbyDatoCmsSizes
+          }
           alt
         }
         languages {
