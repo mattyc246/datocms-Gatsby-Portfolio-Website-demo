@@ -173,7 +173,7 @@ const ContactForm = () => {
       <InputGroup
         className={fieldOrder[activeField] === "name" ? "shown" : "hidden"}
       >
-        <label htmlFor="contactName">1. Who are you?</label>
+        <label htmlFor="contactName">Who are you?</label>
         <input id="contactName" type="text" name="name" placeholder="Full name" />
         <NavButtons>
           <span></span>
@@ -185,7 +185,7 @@ const ContactForm = () => {
       <InputGroup
         className={fieldOrder[activeField] === "email" ? "shown" : "hidden"}
       >
-        <label htmlFor="email">2. Where do I reply to?</label>
+        <label htmlFor="email">Where do I reply to?</label>
         <input type="text" name="email" placeholder="Valid email address" />
         <NavButtons>
           <button className="next-back-btn" onClick={(e) => prevField(e)}>
@@ -199,7 +199,7 @@ const ContactForm = () => {
       <InputGroup
         className={fieldOrder[activeField] === "subject" ? "shown" : "hidden"}
       >
-        <label htmlFor="subject">3. Why are you contacting me?</label>
+        <label htmlFor="subject">Why are you contacting me?</label>
         <input type="text" name="subject" placeholder="Nature of enquiry" />
         <NavButtons>
           <button className="next-back-btn" onClick={(e) => prevField(e)}>
@@ -213,7 +213,7 @@ const ContactForm = () => {
       <InputGroup
         className={fieldOrder[activeField] === "message" ? "shown" : "hidden"}
       >
-        <label htmlFor="message">4. What would you like to say to me?</label>
+        <label htmlFor="message">What would you like to say to me?</label>
         <textarea rows="4" name="message" placeholder="Leave your message..." />
         <NavButtons>
           <button className="next-back-btn" onClick={(e) => prevField(e)}>
