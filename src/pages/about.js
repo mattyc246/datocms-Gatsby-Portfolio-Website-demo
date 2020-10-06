@@ -7,24 +7,76 @@ import Layout from "../components/layout";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFacebookSquare, faGithubSquare, faInstagramSquare, faLinkedin } from "@fortawesome/free-brands-svg-icons";
 
+
+const Content = styled.div`
+  width: 100%;
+  display: block;
+  height: calc(100vh - 18vw);
+  padding: 2vw;
+  position: relative;
+
+  h1 {
+    padding: 1rem;
+    letter-spacing: 4px;
+    font-weight: 700;
+    font-size: 38px;
+  }
+
+  .main-image {
+    width: 100%;
+    border-radius: 5px;
+  }
+
+  @media screen and (min-width: 1024px) {
+    height: calc(100vh - 6vw);
+
+    h1 {
+      position: absolute;
+      top: 0;
+      right: 0;
+    }
+
+    .main-image {
+      width: 70%;
+      border-radius: 5px;
+    }
+  }
+`;
+
 const TextContainer = styled.div`
   display: flex;
-  height: 100%;
-  flex-direction: row;
+  padding: 2vw;
+  width: 100%;
+  flex-direction: column;
   justify-content: center;
-  align-items: center;
+  align-items: space-between;
+  border-radius: 3px;
+
+  @media screen and (min-width: 1024px) {
+    position: absolute;
+    top: 5vw;
+    background-color: white;
+    right: 0;
+    width: 30vw;
+  }
 `;
 
 const FlexyTechs = styled.div`
+  width: 100%;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  width: 100%;
+  background-color: white;
+  border-radius: 3px;
+
+  h6 {
+    width: 100%;
+  }
 
   img {
-    width: 70px;
+    width: 30px;
     margin: 0.5rem;
     transition: all 500ms ease-in-out;
 
@@ -33,6 +85,13 @@ const FlexyTechs = styled.div`
       cursor: pointer;
       transition: all 500ms ease-in-out;
     }
+  }
+
+  @media screen and (min-width: 1024px) {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 50%;
   }
 `;
 
@@ -51,10 +110,18 @@ const About = ({ data: { about } }) => {
   return (
     <Layout>
       <HelmetDatoCms seo={about.seoMetaTags} />
-      <div className="row">
-        <div className="col-md-4">
-          <h1 className="text-center">{about.title}</h1>
-          <Img className="rounded-circle my-4" fluid={about.photo.fluid} />
+      <Content>
+        <h1>{about.title}</h1>
+        <Img className="main-image" fluid={about.photo.fluid} />
+        <TextContainer>
+          <div
+            className="sheet__body"
+            dangerouslySetInnerHTML={{
+              __html: about.bioNode.childMarkdownRemark.html,
+            }}
+            data-sal="slide-up"
+            data-sal-duration="500"
+          />
           <FlexySocials>
             <a href="https://www.facebook.com/mattyc246">
               <FontAwesomeIcon icon={faFacebookSquare} />
@@ -69,30 +136,14 @@ const About = ({ data: { about } }) => {
               <FontAwesomeIcon icon={faLinkedin} />
             </a>
           </FlexySocials>
-        </div>
-        <div className="col-md-7 offset-md-1">
-          <TextContainer>
-            <div
-              className="sheet__body"
-              dangerouslySetInnerHTML={{
-                __html: about.bioNode.childMarkdownRemark.html,
-              }}
-              data-sal="slide-up"
-              data-sal-duration="500"
-            />
-          </TextContainer>
-        </div>
-      </div>
-      <div className="row">
-        <div className="col">
+        </TextContainer>
+        <FlexyTechs>
           <h6 className="my-3">What I use...</h6>
-          <FlexyTechs>
-            {about.techStacks.map((stack) => {
-              return <img key={stack.id} src={stack.url} alt={stack.title} />;
-            })}
-          </FlexyTechs>
-        </div>
-      </div>
+          {about.techStacks.map((stack) => {
+            return <img key={stack.id} src={stack.url} alt={stack.title} />;
+          })}
+        </FlexyTechs>
+      </Content>
     </Layout>
   );
 };

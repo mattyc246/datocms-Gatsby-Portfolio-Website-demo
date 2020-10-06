@@ -18,12 +18,13 @@ const TechContainer = styled.div`
   align-items: center;
   padding: 1rem;
 
-  @media screen and (min-width: 640px) {
+  @media screen and (min-width: 940px) {
     position: absolute;
     left: 2vw;
     bottom: 0;
     width: auto;
     background-color: white;
+    border-radius: 3px;
     box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.2);
     flex-direction: column;
   }
@@ -81,33 +82,56 @@ const PageIndicatorContainer = styled.div`
 `;
 
 const WorkCard = styled.article`
-  position: relative;
+  position: absolute;
+  padding: 0vw 2rem;
+  padding-top: 15vw;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: block;
 
-  ${props => props.active ? `
+  ${(props) => (props.active ? `` : `display: none;`)}
+
+  .shadowy {
+    box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.2);
+    border-radius: 3px;
+    width: 100%;
+
+    @media screen and (min-width: 940px) {
+      width: 85%;
+    }
+  }
+
+  @media screen and (min-width: 940px) {
+    padding-left: 3vw;
+    padding-top: 0;
+    display: block;
+
+    ${(props) =>
+      props.active
+        ? `
     opacity: 1;
     width: 100%;
     height: 100%;
     transition: width 0.5s, height 0.5s, opacity 0.5s 0.5s;
-  ` : `
+  `
+        : `
     opacity: 0;
-    width: 0;
-    height: 0;
+    width: 0!important;
+    height: 0!important;
     transition: width 0.5s 0.5s, height 0.5s 0.5s, opacity 0.5s;
   `}
-
-  .shadowy {
-    box-shadow: 10px 10px 15px rgba(0,0,0,0.2);
   }
 `;
 
 const FloatyBox = styled.div`
-  /* min-width: 50vw; */
   background-color: white;
+  border-radius: 3px;
   box-shadow: 10px 10px 25px rgba(0, 0, 0, 0.2);
   margin-top: 1rem;
   padding: 1rem;
 
-  @media screen and (min-width: 640px) {
+  @media screen and (min-width: 940px) {
     position: absolute;
     bottom: 0;
     right: 3vw;
@@ -119,16 +143,23 @@ const CardsContainer = styled.div`
   width: 100%;
   display: block;
   height: calc(100vh - 18vw);
-  padding: 0 7vw;
+  padding: 1vw 7vw;
   position: relative;
+
+  h1 {
+    letter-spacing: 4px;
+    font-weight: 700;
+    font-size: 38px;
+  }
 
   .left-arrow {
     position: absolute;
     top: 50%;
-    left: 5px;
+    left: 0px;
     transform: translate(0%, -50%);
     font-size: 36px;
     cursor: pointer;
+    z-index: 3;
   }
 
   .right-arrow {
@@ -138,11 +169,22 @@ const CardsContainer = styled.div`
     transform: translate(0%, -50%);
     font-size: 36px;
     cursor: pointer;
+    z-index: 3;
   }
 
-  @media screen and (min-width: 640px) {
-    padding: 0 3rem;
+  @media screen and (min-width: 940px) {
+    padding: 1vw 3rem;
     height: calc(100vh - 6vw);
+
+    h1 {
+      position: absolute;
+      top: 0;
+      right: 0;
+      z-index: 3;
+      padding: 1rem;
+      background-color: white;
+      border-radius: 3px;
+    }
   }
 `;
 
@@ -170,6 +212,7 @@ const Work = ({ data: { work } }) => {
   return (
     <Layout seo={work.seoMetaTags}>
       <CardsContainer>
+        <h1>Work</h1>
         <PageIndicatorContainer>
           {projects.map((project, indx) => {
             return (
